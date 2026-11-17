@@ -8,8 +8,6 @@ Endpoints:
   GET /qualities?url=<youtube-link>        -> OTTA requestil ella qualitykum ulla DOWNLOAD LINKS response aayi kittum
 
 Run:
-  pip install fastapi uvicorn yt-dlp
-  ffmpeg install cheyyanam (apt install ffmpeg / winget install ffmpeg)
   uvicorn main:app --host 0.0.0.0 --port 8000
 """
 
@@ -49,7 +47,7 @@ def _base_url(request: Request) -> str:
 
 # ---------------- 1) MP3 ----------------
 @app.get("/mp3")
-def download_mp3(url: str = Query(..., description="YouTube video link"), request: Request = None):
+def download_mp3(url: str = Query(..., description="YouTube video link")):
     task_id = str(uuid.uuid4())[:8]
     outtmpl = os.path.join(DOWNLOAD_DIR, f"{task_id}_audio.%(ext)s")
 
